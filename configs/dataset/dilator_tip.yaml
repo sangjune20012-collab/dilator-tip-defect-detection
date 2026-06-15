@@ -1,0 +1,7 @@
+dataset:
+  name: dilator_tip
+  splits: [train, valid, test]
+  class_names: [impurity, short_shot]
+  roi: [0, 1000, 2400, 2000]
+  patch_size: 768
+  overlap: 384

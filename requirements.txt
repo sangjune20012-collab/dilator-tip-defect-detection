@@ -1,0 +1,8 @@
+opencv-python
+numpy
+scikit-learn
+tqdm
+matplotlib
+pillow
+ultralytics
+# rfdetr is required only for RF-DETR training.
