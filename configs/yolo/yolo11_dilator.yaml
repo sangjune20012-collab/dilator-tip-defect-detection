@@ -1,0 +1,10 @@
+model: yolo11s.pt
+data: data/processed/yolo/data.yaml
+project: outputs/yolo
+name: yolo11s_dilator
+epochs: 100
+imgsz: 768
+batch: -1
+device: 0
+workers: 8
+patience: 30
