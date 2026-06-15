@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.ipynb_checkpoints/
+
+# Environment
+.env
+.venv/
+venv/
+conda_env/
+*.conda
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/*
+!data/README.md
+
+# Weights
+weights/*
+!weights/README.md
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.engine
+*.safetensors
+
+# Outputs
+outputs/
+results/
+runs/
+logs/
+wandb/
+tensorboard/
+
+# Generated datasets
+Dilator_side_Raw_Data/
+Dilator_side_Raw_Data_YOLO/
+Dilator_side_Raw_Data_SameSplit/
+Dilator_ROI_crop_YOLO/
+Dilator_patch_CentricCrop_Dataset_Final/
+RF_DETR_Dataset_Final/
+RF_DETR_Dataset_SlidingWindow/
+Dilator_patch_CentricCrop_Dataset_Final/
+Dilator_ROI_crop_YOLO/
+
+# Generated visualizations and analysis outputs
+GT_Visualization_Raw/
+GT_Visualization_그림 1 Style/
+bbox_statistics_results/
+Result/
+논문 그림 3 비교 사진 가로 버전/
+논문 그림 3 비교 사진 긴한 파랑/
+논문 그림 3 비교 사진 최종본/
+
+# Large media
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Ignore images by default
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.tif
+*.tiff
+
+# Allow selected public assets
+!assets/*.png
+!assets/*.jpg
+!assets/*.jpeg
+
+# Local/private configs
+local_config.yaml
+local_config.yml
+private_config.yaml
