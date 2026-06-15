@@ -188,7 +188,7 @@ def write_data_yaml(dst_root: Path, splits: Sequence[str], class_names: Sequence
     train_split = "train" if "train" in splits else splits[0]
     val_split = "valid" if "valid" in splits else train_split
     test_split = "test" if "test" in splits else val_split
-    lines = ["path: .", f"train: {train_split}", f"val: {val_split}", f"test: {test_split}", "", "names:"]
+    lines = [f"train: {train_split}", f"val: {val_split}", f"test: {test_split}", "", "names:"]
     for idx, name in enumerate(class_names):
         lines.append(f"  {idx}: {name}")
     (dst_root / "data.yaml").write_text("\n".join(lines) + "\n", encoding="utf-8")
