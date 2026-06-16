@@ -1,25 +1,19 @@
 # Dilator Tip Defect Detection
 
-Research codebase for **object detection-based tiny irregular defect detection in high-resolution dilator tip inspection images**.
+Research codebase for detecting tiny irregular defects in high-resolution dilator tip inspection images.
 
-This repository supports the undergraduate poster paper:
+This repository provides the implementation of a data-centric object detection pipeline for medical device manufacturing inspection. The pipeline improves small defect detection by applying dilator tip ROI extraction and overlapping patch generation before training object detection models.
 
-**Object Detection Based Tiny Irregular Defect Detection in High-Resolution Dilator Tip Images**
-**고해상도 Dilator Tip 이미지에서의 객체 검출 기반 미세 비정형 결함 검출**
-
-The project applies a data-centric preprocessing strategy consisting of **ROI extraction** and **overlapping patch generation** to improve small defect detection performance. YOLOv11 and RF-DETR are compared under the same dataset split and evaluation protocol.
-
----
+The repository includes preprocessing scripts, YOLO-format and COCO-format dataset conversion tools, YOLOv11 and RF-DETR training scripts, visualization utilities, and experimental result summaries.
 
 ## Paper Information
 
-**Title:** Object Detection Based Tiny Irregular Defect Detection in High-Resolution Dilator Tip Images
-**Korean Title:** 고해상도 Dilator Tip 이미지에서의 객체 검출 기반 미세 비정형 결함 검출
-**Task:** Small irregular defect detection in high-resolution dilator tip inspection images
-**Models:** YOLOv11, RF-DETR
-**Keywords:** Industrial Inspection, Medical Device Manufacturing, Catheter, YOLO, DETR
-
----
+* **Title**: Object Detection Based Tiny Irregular Defect Detection in High-Resolution Dilator Tip Images
+* **Korean Title**: 고해상도 Dilator Tip 이미지에서의 객체 검출 기반 미세 비정형 결함 검출
+* **Paper Type**: Undergraduate poster paper
+* **Task**: Tiny irregular defect detection in high-resolution dilator tip inspection images
+* **Models**: YOLOv11, RF-DETR
+* **Keywords**: Industrial Inspection, Medical Device Manufacturing, Catheter, YOLO, DETR
 
 ## Overview
 
@@ -37,17 +31,13 @@ To address this issue, the pipeline applies:
 
 The main goal is to evaluate whether object detection models can effectively detect tiny and irregular defects in high-resolution medical device manufacturing images.
 
----
-
 ## Figures
 
 ### Figure 1. Defect Examples
 
-Figure 1 shows a full high-resolution dilator tip inspection image and enlarged examples of representative target defects, including **adhered particle** and **short-shot** defects.
+Figure 1 shows a full high-resolution dilator tip inspection image and enlarged examples of representative target defects, including adhered particle and short-shot defects.
 
 ![Figure 1. Defect Examples](assets/figure1_defect_examples.png)
-
----
 
 ### Figure 2. Overall Pipeline
 
@@ -55,15 +45,11 @@ Figure 2 illustrates the overall pipeline of the proposed defect detection frame
 
 ![Figure 2. Overall Pipeline](assets/figure2_pipeline.png)
 
----
-
 ### Figure 3. Detection Results Before and After Preprocessing
 
 Figure 3 compares qualitative detection results before and after applying the proposed preprocessing strategy. After ROI extraction and overlapping patch-based preprocessing, small defect regions are detected more clearly.
 
 ![Figure 3. Detection Results](assets/figure3_detection_results.png)
-
----
 
 ## Method Overview
 
@@ -89,8 +75,6 @@ YOLOv11 and RF-DETR are trained and evaluated under the same dataset split. The 
 * mAP50:95
 * Precision
 * Recall
-
----
 
 ## Repository Structure
 
@@ -146,8 +130,6 @@ dilator-tip-defect-detection/
 └── README.md
 ```
 
----
-
 ## Environment Setup
 
 Create and activate a Python environment.
@@ -171,11 +153,9 @@ pip install ultralytics
 
 RF-DETR requires its own package and pretrained weight file. Model weights are not included in this repository.
 
----
-
 ## Dataset and Weight Policy
 
-This repository does **not** include:
+This repository does not include:
 
 * Raw inspection images
 * YOLO datasets
@@ -204,8 +184,6 @@ weights/
 
 The `weights/` directory is ignored by Git.
 
----
-
 ## Usage
 
 Set `PYTHONPATH` before running modules from the repository root.
@@ -221,8 +199,6 @@ set PYTHONPATH=%CD%\src
 ```bash
 export PYTHONPATH=$PWD/src
 ```
-
----
 
 ## 1. ROI Crop for YOLO Dataset
 
@@ -247,8 +223,6 @@ roi_cropped_yolo_dataset/
 └── data.yaml
 ```
 
----
-
 ## 2. Dataset EDA
 
 Run dataset-level integrity checks and class distribution analysis.
@@ -269,8 +243,6 @@ This reports:
 * Invalid label lines
 * Orphan label files
 * Class-wise annotation counts
-
----
 
 ## 3. YOLO to COCO Conversion
 
@@ -293,8 +265,6 @@ rfdetr_coco_dataset/
 └── test/
 ```
 
----
-
 ## 4. Ground-Truth Visualization
 
 Generate ground-truth visualization images.
@@ -307,8 +277,6 @@ python -m dilator_tip_detection.visualization.visualize_gt ^
   --class-names 0=impurity 1=short_shot ^
   --include-empty
 ```
-
----
 
 ## 5. YOLOv11 Training
 
@@ -344,8 +312,6 @@ python -m dilator_tip_detection.train.train_yolo ^
   --patience 1
 ```
 
----
-
 ## 6. RF-DETR Training
 
 Run RF-DETR training on the COCO-format dataset.
@@ -370,20 +336,16 @@ On Windows, if OpenMP-related runtime conflicts occur, add:
 --allow-kmp-duplicate
 ```
 
----
-
 ## Main Results
 
 | Model   | Preprocessing | mAP50 (%) | mAP50:95 (%) | Precision (%) | Recall (%) |
-| ------- | ------------: | --------: | -----------: | ------------: | ---------: |
-| YOLOv11 |        Before |      65.8 |         31.1 |          74.5 |       62.1 |
-| YOLOv11 |         After |      73.9 |         36.4 |          74.1 |       69.8 |
-| RF-DETR |        Before |      70.6 |         35.8 |          82.2 |       67.6 |
-| RF-DETR |         After |      74.3 |         37.8 |          78.0 |       74.3 |
+| ------- | ------------- | --------: | -----------: | ------------: | ---------: |
+| YOLOv11 | Before        |      65.8 |         31.1 |          74.5 |       62.1 |
+| YOLOv11 | After         |      73.9 |         36.4 |          74.1 |       69.8 |
+| RF-DETR | Before        |      70.6 |         35.8 |          82.2 |       67.6 |
+| RF-DETR | After         |      74.3 |         37.8 |          78.0 |       74.3 |
 
-The proposed preprocessing strategy improved mAP50 by **8.1 percentage points** for YOLOv11 and **3.7 percentage points** for RF-DETR. Recall also increased by more than **6 percentage points** for both models.
-
----
+The proposed preprocessing strategy improved mAP50 by 8.1 percentage points for YOLOv11 and 3.7 percentage points for RF-DETR. Recall also increased by more than 6 percentage points for both models.
 
 ## Class-wise Performance
 
@@ -396,86 +358,58 @@ The proposed preprocessing strategy improved mAP50 by **8.1 percentage points** 
 
 RF-DETR showed stronger performance on adhered particle defects, which have irregular shapes and large size variation. YOLOv11 showed stronger performance on short-shot defects, which have clearer local shape changes.
 
----
+## Preprocessing Validation Summary
 
-## Validation Status
+### ROI Crop
 
-The repository has been validated at the preprocessing and smoke-test level.
+* Total images: 376
+* Failed images: 0
+* Input boxes: 715
+* Output boxes: 715
 
-Validated pipeline:
+### Dataset EDA
 
-```text
-YOLO dataset
-→ ROI crop
-→ Dataset EDA
-→ YOLO-to-COCO conversion
-→ GT visualization
-→ YOLOv11 1-epoch smoke training
-```
+* Total images: 376
+* Normal images: 17
+* Defect images: 359
+* Missing label images: 0
+* Invalid label lines: 0
+* Orphan txt files: 0
 
-Local validation summary:
+### Class Counts
 
-```text
-ROI crop:
-- Total images: 376
-- Failed images: 0
-- Input boxes: 715
-- Output boxes: 715
+* impurity: 545
+* short_shot: 170
 
-Dataset EDA:
-- Total images: 376
-- Normal images: 17
-- Defect images: 359
-- Missing label images: 0
-- Invalid label lines: 0
-- Orphan txt files: 0
+### YOLO-to-COCO Conversion
 
-Class counts:
-- impurity: 545
-- short_shot: 170
-
-YOLO-to-COCO conversion:
-- Train: 214 images / 425 annotations
-- Valid: 121 images / 208 annotations
-- Test: 41 images / 82 annotations
-
-GT visualization:
-- Test visualizations saved: 41
-
-YOLOv11 smoke training:
-- 1 epoch completed successfully
-- Validation completed successfully
-```
-
-The YOLOv11 1-epoch result is only a smoke test and should not be interpreted as the final model performance.
-
----
+* Train: 214 images / 425 annotations
+* Valid: 121 images / 208 annotations
+* Test: 41 images / 82 annotations
 
 ## Notes
 
-* This repository is intended for research-code organization and reproducibility.
-* Dataset and model weight files must be prepared separately.
-* Generated outputs should be saved outside this repository or under ignored directories.
-* Official results should be reproduced with the full training schedule and original experimental configuration.
+This repository is intended for research-code organization and reproducibility.
 
----
+Dataset and model weight files must be prepared separately.
+
+Generated outputs should be saved outside this repository or under ignored directories.
+
+Official results should be reproduced with the full training schedule and original experimental configuration.
 
 ## Citation
 
 ```bibtex
 @inproceedings{park2026dilator,
   title={Object Detection Based Tiny Irregular Defect Detection in High-Resolution Dilator Tip Images},
-  author={Park, Sang Jun and Min, Jae Yeong and Kim, Yejin and Yun, Jun-Seok and Kim, Min Su and Yun, Jong Pil},
+  author={SANG JUN Park and JAE YEONG Min and YEJIN Kim and JUN-SEOK Yun and MIN SU Kim and JONG PIL Yun},
   year={2026},
   note={Undergraduate poster paper}
 }
 ```
 
----
-
 ## License
 
-This repository is currently maintained for research purposes.
-A formal license can be added after confirming data and model release conditions.
+This repository is currently maintained for research purposes. A formal license can be added after confirming data and model release conditions.
 
 
